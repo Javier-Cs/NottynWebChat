@@ -1,0 +1,19 @@
+---
+
+import FooterBase from "@/components/FooterBase.astro";
+import LayoutBase from "./layoutBase.astro";
+import Nabvar from "@/components/Nabvar.astro";
+import Home from "@/components/Home.astro";
+---
+
+<LayoutBase>
+    <!--<Nabvar/> -->
+    <main>
+        <slot/>            
+    </main>
+
+    <FooterBase/>
+     
+
+
+</LayoutBase>
