@@ -1,0 +1,15 @@
+---
+const { editor, notes } = Astro.props
+---
+
+<section
+  class="grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-8 mt-8"
+>
+  <div>
+    <slot name="editor" />
+  </div>
+
+  <div class="border-l border-zinc-700 pl-6">
+    <slot name="notes" />
+  </div>
+</section>

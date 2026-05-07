@@ -1,35 +1,36 @@
 ---
 import '../styles/global.css'
-import LayoutHome from "@/app/layouts/LayoutHome.astro";
+import AppShell from "@/components/AppShell.astro";
+import NoteEditor from "@/modules/NoteEditor";
+import NotesList from "@/modules/NotesList";
 ---
-<LayoutHome>
-    <section class="flex flex-col items-center justify-center min-h-screen bg-gray-100">
-    <h1 class="text-4xl font-bold text-indigo-600 mb-4">
-      Bienvenido a mi sitio en Astro 🚀
-    </h1>
-    <p class="text-lg text-gray-700 mb-8">
-      Este es el componente Home, estilizado con TailwindCSS.
-    </p>
+---
 
-    <nav>
-      <ul class="flex space-x-6">
-        <li>
-          <a href="/about" class="text-gray-600 hover:text-indigo-600 transition">
-            Sobre mí
-          </a>
-        </li>
-        <li>
-          <a href="/projects" class="text-gray-600 hover:text-indigo-600 transition">
-            Proyectos
-          </a>
-        </li>
-        <li>
-          <a href="/contact" class="text-gray-600 hover:text-indigo-600 transition">
-            Contacto
-          </a>
-        </li>
-      </ul>
-    </nav>
-  </section>
-</LayoutHome>
+<section
+  class="
+    flex
+    flex-col
+    items-center
+    justify-center
+    text-center
+    h-full
+    w-full
+    px-6
+    py-10
+    bg-slate-200 dark:bg-zinc-800
+  "
+>
 
+  <AppShell>
+                
+    <Fragment slot="editor">
+        <NoteEditor client:load />
+    </Fragment>
+
+    <Fragment slot="notes">
+        <NotesList client:visible />
+    </Fragment>
+                
+  </AppShell>
+
+</section>

@@ -2,6 +2,7 @@
 // implementacion de packege 
 import pkg from '../../../package.json' assert {type: 'json'};
 
+import FooterBase from "@/components/FooterBase.astro";
 import {url} from '@/libs/data.ts';
 
 import {SITE_TITLE} from '../constantes.ts';
@@ -27,7 +28,7 @@ const {class : clazz} = Astro.props;
 
 		<meta
 			name="author"
-			content="Julian Cataldo, Zoltán Szőgyényi, Robert Tanislav"
+			content="javierCr"
 		/>
 		<meta name="copyright" content="MIT" />
 
@@ -48,8 +49,9 @@ const {class : clazz} = Astro.props;
 		class:list={[
 			//
 			clazz,
+			'min-h-screen',
 			// color de fondo
-			'bg-slate-200 dark:bg-slate-800',
+			'bg-slate-200 dark:bg-zinc-800',
 			'scrollbar scrollbar-w-3 scrollbar-thumb-rounded-[0.25rem]',
 			'scrollbar-track-slate-200  scrollbar-thumb-gray-400',
 			'dark:scrollbar-track-slate-100 dark:scrollbar-thumb-gray-200',
@@ -57,6 +59,7 @@ const {class : clazz} = Astro.props;
 	>
 		<slot />
 	</body>
+	
 </html>
 
 

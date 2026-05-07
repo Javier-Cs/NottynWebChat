@@ -21,6 +21,7 @@ export default defineConfig({
         '@components': path.resolve('./src/components'),
         '@layouts': path.resolve('./src/app/layouts'),
         '@libs': path.resolve('./src/lib'),
+        '@utils': path.resolve('./src/types'),
       }
     }
   },

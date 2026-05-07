@@ -4,16 +4,21 @@ import FooterBase from "@/components/FooterBase.astro";
 import LayoutBase from "./layoutBase.astro";
 import Nabvar from "@/components/Nabvar.astro";
 import Home from "@/components/Home.astro";
+import AppShell from "@/components/AppShell.astro";
+import NoteEditor from "@/modules/NoteEditor";
+import NotesList from "@/modules/NotesList";
 ---
 
 <LayoutBase>
-    <!--<Nabvar/> -->
-    <main>
-        <slot/>            
-    </main>
+    <div class="min-h-screen flex flex-col overflow-hidden">
 
-    <FooterBase/>
-     
+        <Nabvar/> 
 
+        <main class="flex-1 flex items-center justify-center pt-16">
+            <slot/>            
+        </main>
 
+        <FooterBase/>
+
+    </div>
 </LayoutBase>

@@ -20,7 +20,8 @@
       "@/pages/*": ["src/pages/*"],
       "@/types/*": ["src/types/*"],
       "@/util/*": ["src/utils/*"],
-      "@/styles/*": ["src/styles/*"]
+      "@/styles/*": ["src/styles/*"],
+      "@/services/*": ["src/services/*"]
       //"@//*": ["src//*"]
 
     }
