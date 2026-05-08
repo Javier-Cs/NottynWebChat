@@ -8,29 +8,28 @@ import NotesList from "@/modules/NotesList";
 
 <section
   class="
-    flex
-    flex-col
-    items-center
-    justify-center
-    text-center
-    h-full
     w-full
+    bg-zinc-900
     px-6
-    py-10
-    bg-slate-200 dark:bg-zinc-800
-  "
->
+    py-6
+    bg-gray-100 dark:bg-zinc-800
+  ">
 
-  <AppShell>
-                
-    <Fragment slot="editor">
+  <div class="
+      mx-auto
+      w-full
+      max-w-[1700px]
+    ">
+    <AppShell>
+      <Fragment slot="editor">
         <NoteEditor client:load />
-    </Fragment>
+      </Fragment>
 
-    <Fragment slot="notes">
-        <NotesList client:visible />
-    </Fragment>
-                
-  </AppShell>
+      <Fragment slot="notes">
+          <NotesList client:visible />
+      </Fragment>
+
+    </AppShell>
+  </div>
 
 </section>

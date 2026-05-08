@@ -3,13 +3,20 @@ const { editor, notes } = Astro.props
 ---
 
 <section
-  class="grid grid-cols-1 lg:grid-cols-[1fr_400px] gap-8 mt-8"
+  class="
+    grid
+    grid-cols-1
+    xl:grid-cols-[1fr_380px]
+    gap-8
+    items-start
+    w-full
+    bg-gray-100 dark:bg-zinc-800"
 >
-  <div>
+  <div class="min-w-0">
     <slot name="editor" />
   </div>
 
-  <div class="border-l border-zinc-700 pl-6">
+  <div class="min-w-0">
     <slot name="notes" />
   </div>
 </section>
