@@ -29,8 +29,7 @@ export default function NotesList() {
         self-start
         rounded-3xl
         border
-        border-zinc-800
-        bg-zinc-950/70
+        border-zinc-700
         p-5
         backdrop-blur-xl
         shadow-2xl
@@ -44,20 +43,17 @@ export default function NotesList() {
           inset-0
           rounded-3xl
           bg-gradient-to-b
-          from-violet-500/5
-          via-transparent
-          to-cyan-500/5
         "
       />
 
       {/* Header */}
       <div className="relative mb-5 flex items-center justify-between">
         <div>
-          <h2 className="text-lg font-semibold text-zinc-100">
+          <h2 className="text-lg font-semibold text-black dark:text-zinc-100">
             Notes
           </h2>
 
-          <p className="text-sm text-zinc-400">
+          <p className="text-sm text-zinc-700 dark:text-zinc-400">
             Your saved documents and snippets
           </p>
         </div>

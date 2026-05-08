@@ -12,8 +12,7 @@ export default function NoteEditor() {
         gap-5
         rounded-3xl
         border
-        border-zinc-800
-        bg-zinc-950/70
+        border-zinc-700
         p-5
         backdrop-blur-xl
         shadow-2xl
@@ -27,9 +26,6 @@ export default function NoteEditor() {
           inset-0
           rounded-3xl
           bg-gradient-to-br
-          from-cyan-500/5
-          via-transparent
-          to-violet-500/5
         "
       />
 
@@ -38,11 +34,11 @@ export default function NoteEditor() {
         {/* Header */}
         <div className="mb-4 flex items-center justify-between">
           <div>
-            <h2 className="text-lg font-semibold text-zinc-100">
+            <h2 className="text-3xl dark:text-zinc-100 font-semibold text-black">
               New Note
             </h2>
 
-            <p className="text-sm text-zinc-400">
+            <p className="text-1xl text-zinc-7800 dark:text-zinc-400">
               Write ideas, code snippets or documentation
             </p>
           </div>
@@ -112,18 +108,18 @@ export default function NoteEditor() {
               resize-none
               bg-transparent
               p-5
-              text-sm
+              text-1xl
               leading-7
               text-zinc-100
               outline-none
-              placeholder:text-zinc-500
+              placeholder:text-zinc-100
             "
           />
         </div>
 
         {/* Footer */}
         <div className="mt-4 flex items-center justify-between">
-          <p className="text-xs text-zinc-500">
+          <p className="text-1xl text-black darck:text-zinc-100">
             {content.length} characters
           </p>
 
@@ -131,11 +127,11 @@ export default function NoteEditor() {
             className="
               rounded-xl
               bg-gradient-to-r
-              from-cyan-500
-              to-violet-500
+              from-blue-700
+              to-blue-700
               px-5
               py-2.5
-              text-sm
+              text-1xl
               font-medium
               text-white
               transition-all
