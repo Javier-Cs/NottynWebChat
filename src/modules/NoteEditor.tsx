@@ -1,154 +1,179 @@
 import { useState } from "react"
-import AddBlockButtons from "./AddBlockButtons"
+
+import BlockRenderer from "../Blocks/BlockRenderer"
+import AddBlockBar from "../Blocks/AddBlockBar"
+
+import type { Block, Note } from "../types/note"
 
 export default function NoteEditor() {
-  const [content, setContent] = useState("")
+  const [note, setNote] = useState<Note>({
+    codex: crypto.randomUUID(),
+    aliasAnonimo: "juan",
+    fechaCreacion: new Date().toISOString(),
+    bloques: []
+  })
+
+  function addTextBlock() {
+    const newBlock: Block = {
+      idBloque: Date.now(),
+      tipo: "text",
+      contenido: "",
+      lenguaje: null,
+      orden: note.bloques.length,
+      lineas: 1
+    }
+
+    setNote((prev) => ({
+      ...prev,
+      bloques: [...prev.bloques, newBlock]
+    }))
+  }
+
+  function addCodeBlock() {
+    const newBlock: Block = {
+      idBloque: Date.now(),
+      tipo: "code",
+      contenido: "",
+      lenguaje: "javascript",
+      orden: note.bloques.length,
+      lineas: 1
+    }
+
+    setNote((prev) => ({
+      ...prev,
+      bloques: [...prev.bloques, newBlock]
+    }))
+  }
+
+  function updateBlock(id: number, content: string) {
+    setNote((prev) => ({
+      ...prev,
+      bloques: prev.bloques.map((block) =>
+        block.idBloque === id
+          ? {
+              ...block,
+              contenido: content
+            }
+          : block
+      )
+    }))
+  }
 
   return (
     <section
       className="
-        relative
         flex
-        gap-5
+        h-[85vh]
+        flex-col
+        overflow-hidden
         rounded-3xl
         border
-        border-zinc-700
-        p-5
+        border-zinc-800
+        bg-zinc-950/70
+        p-6
         backdrop-blur-xl
         shadow-2xl
       "
     >
-      {/* Glow background */}
+      {/* Header */}
       <div
         className="
-          pointer-events-none
-          absolute
-          inset-0
-          rounded-3xl
-          bg-gradient-to-br
+          mb-6
+          flex
+          items-start
+          justify-between
+          gap-4
         "
-      />
+      >
+        <div>
+          <h1 className="text-3xl font-bold text-zinc-100">
+            Nota Nueva
+          </h1>
 
-      {/* Editor */}
-      <div className="relative flex-1">
-        {/* Header */}
-        <div className="mb-4 flex items-center justify-between">
-          <div>
-            <h2 className="text-3xl dark:text-zinc-100 font-semibold text-black">
-              New Note
-            </h2>
+          <p className="mt-1 text-zinc-400">
+            Escribe ideas, fragmentos de código o documentación.
+          </p>
+        </div>
 
-            <p className="text-1xl text-zinc-7800 dark:text-zinc-400">
-              Write ideas, code snippets or documentation
-            </p>
-          </div>
+        {/* Save button */}
+        <button
+          className="
+            rounded-xl
+            bg-gradient-to-r
+            from-green-600
+            to-emerald-500
+            px-4
+            py-2
+            text-sm
+            font-medium
+            text-white
+            transition-all
+            duration-300
+            hover:scale-[1.03]
+            hover:shadow-[0_0_20px_rgba(34,197,94,0.35)]
+            active:scale-[0.98]
+          "
+        >
+          Save note
+        </button>
+      </div>
 
+      {/* Content */}
+      <div className="flex-1
+          overflow-y-auto
+          pr-2
+        "
+        style={{
+          scrollbarWidth: "thin"
+        }}
+      >
+        {/* Empty state */}
+        {note.bloques.length === 0 && (
           <div
             className="
               flex
+              h-full
+              min-h-[420px]
+              flex-col
               items-center
-              gap-2
-              rounded-full
+              justify-center
+              rounded-2xl
               border
+              border-dashed
               border-zinc-800
-              bg-zinc-900
-              px-3
-              py-1
-              text-xs
-              text-zinc-400
+              bg-zinc-900/20
+              text-center
             "
           >
-            <div className="h-2 w-2 rounded-full bg-emerald-400" />
-            Auto save
+            <h2 className="mb-2 text-xl font-semibold text-zinc-200">
+              Empieza a escribir
+            </h2>
+
+            <p className="max-w-md text-sm text-zinc-500">
+              Agrega bloques de texto o código para comenzar
+              tu nota técnica.
+            </p>
           </div>
-        </div>
+        )}
 
-        {/* Textarea container */}
-        <div
-          className="
-            group
-            relative
-            overflow-hidden
-            rounded-2xl
-            border
-            border-zinc-800
-            bg-zinc-900/80
-            transition-all
-            duration-300
-            focus-within:border-cyan-400/40
-            focus-within:shadow-[0_0_30px_rgba(34,211,238,0.08)]
-          "
-        >
-          {/* Animated glow */}
-          <div
-            className="
-              pointer-events-none
-              absolute
-              inset-0
-              opacity-0
-              transition-opacity
-              duration-300
-              group-focus-within:opacity-100
-              bg-gradient-to-r
-              from-cyan-500/5
-              via-transparent
-              to-violet-500/5
-            "
-          />
-
-          <textarea
-            value={content}
-            onChange={(e) => setContent(e.target.value)}
-            placeholder="Start writing your note..."
-            className="
-              relative
-              z-10
-              min-h-[65vh]
-              w-full
-              resize-none
-              bg-transparent
-              p-5
-              text-1xl
-              leading-7
-              text-zinc-100
-              outline-none
-              placeholder:text-zinc-100
-            "
-          />
-        </div>
-
-        {/* Footer */}
-        <div className="mt-4 flex items-center justify-between">
-          <p className="text-1xl text-black darck:text-zinc-100">
-            {content.length} characters
-          </p>
-
-          <button
-            className="
-              rounded-xl
-              bg-gradient-to-r
-              from-blue-700
-              to-blue-700
-              px-5
-              py-2.5
-              text-1xl
-              font-medium
-              text-white
-              transition-all
-              duration-300
-              hover:scale-[1.02]
-              hover:shadow-[0_0_25px_rgba(59,130,246,0.35)]
-              active:scale-[0.98]
-            "
-          >
-            Save note
-          </button>
+        {/* Blocks */}
+        <div className="space-y-4">
+          {note.bloques.map((block) => (
+            <BlockRenderer
+              key={block.idBloque}
+              block={block}
+              onChange={updateBlock}
+            />
+          ))}
         </div>
       </div>
 
-      {/* Buttons */}
-      <div className="relative">
-        <AddBlockButtons />
+      {/* Footer */}
+      <div className=" border-zinc-800">
+        <AddBlockBar
+          onAddText={addTextBlock}
+          onAddCode={addCodeBlock}
+        />
       </div>
     </section>
   )

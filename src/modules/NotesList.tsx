@@ -1,7 +1,6 @@
 import { useEffect, useState } from "react"
 import { getNotes } from "@/services/notes.service"
 import type { Note } from "@/types/note.tsx"
-import NoteCard from "./NoteCard"
 
 export default function NotesList() {
   const [notes, setNotes] = useState<Note[]>([])
@@ -50,13 +49,15 @@ export default function NotesList() {
       <div className="relative mb-5 flex items-center justify-between">
         <div>
           <h2 className="text-lg font-semibold text-black dark:text-zinc-100">
-            Notes
+            Notas
           </h2>
 
           <p className="text-sm text-zinc-700 dark:text-zinc-400">
             Your saved documents and snippets
           </p>
         </div>
+        
+     
 
         <div
           className="
