@@ -1,6 +1,7 @@
 ---
 import '../styles/global.css'
 import { logosvg } from '@/app/constantes';
+import Loginf from '@/moduls/LoginForm'
 ---
 
 <nav class="bg-neutral-primary fixed w-full z-20 top-0 start-0 border-default  bg-gray-100 dark:bg-zinc-800">
@@ -11,12 +12,7 @@ import { logosvg } from '@/app/constantes';
     </a>
     
     <div class="flex md:order-2 space-x-3 md:space-x-0 rtl:space-x-reverse px-8">
-        <button 
-          type="button" 
-          class="text-white bg-green-600 hover:bg-green-700 focus:ring-4 focus:ring-blue-300 shadow-sm font-medium rounded-md text-sm px-6 py-2 focus:outline-none"
-        >
-          Iniciar Sesion
-        </button>
+        <Loginf client:load />
         <!--amburguesa -->
         <button data-collapse-toggle="navbar-sticky" type="button" class="inline-flex items-center p-2 w-10 h-10 justify-center text-sm text-body rounded-base md:hidden hover:bg-neutral-secondary-soft hover:text-heading focus:outline-none focus:ring-2 focus:ring-neutral-tertiary" aria-controls="navbar-sticky" aria-expanded="false">
             <span class="sr-only">Open main menu</span>
