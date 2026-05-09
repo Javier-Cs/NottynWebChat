@@ -1,9 +1,10 @@
-import { useState } from "react"
+import { useRef, useState } from "react"
 
 import BlockRenderer from "../Blocks/BlockRenderer"
 import AddBlockBar from "../Blocks/AddBlockBar"
 
 import type { Block, Note } from "../types/note"
+
 
 export default function NoteEditor() {
   const [note, setNote] = useState<Note>({
@@ -12,6 +13,18 @@ export default function NoteEditor() {
     fechaCreacion: new Date().toISOString(),
     bloques: []
   })
+
+
+  const bottomRef = useRef<HTMLDivElement | null>(null)
+
+  function scrollToBottom() {
+    setTimeout(() => {
+      bottomRef.current?.scrollIntoView({
+        behavior: "smooth",
+        block: "end"
+      })
+    }, 50)
+  }
 
   function addTextBlock() {
     const newBlock: Block = {
@@ -27,6 +40,7 @@ export default function NoteEditor() {
       ...prev,
       bloques: [...prev.bloques, newBlock]
     }))
+    scrollToBottom()
   }
 
   function addCodeBlock() {
@@ -39,10 +53,12 @@ export default function NoteEditor() {
       lineas: 1
     }
 
+
     setNote((prev) => ({
       ...prev,
       bloques: [...prev.bloques, newBlock]
     }))
+    scrollToBottom()
   }
 
   function updateBlock(id: number, content: string) {
@@ -104,7 +120,7 @@ export default function NoteEditor() {
             to-emerald-500
             px-4
             py-2
-            text-sm
+            text-1xl
             font-medium
             text-white
             transition-all
@@ -165,7 +181,11 @@ export default function NoteEditor() {
               onChange={updateBlock}
             />
           ))}
+
+          
         </div>
+        {/* Bottom scroll anchor */}
+        <div ref={bottomRef} />
       </div>
 
       {/* Footer */}

@@ -27,6 +27,7 @@ export default function NotesList() {
         relative
         self-start
         rounded-3xl
+        h-[85vh]
         border
         border-zinc-700
         p-5
@@ -181,12 +182,7 @@ export default function NotesList() {
             </div>
           )}
 
-          {notes.map((note) => (
-            <NoteCard
-              key={note.id}
-              note={note}
-            />
-          ))}
+         
         </div>
       )}
     </aside>
