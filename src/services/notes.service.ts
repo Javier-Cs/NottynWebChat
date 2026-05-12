@@ -31,7 +31,7 @@ export async function autoSave(note: Note){
 
 
 
-/*
+
 export async function getNotes(): Promise<Note[]> {
   const response = await fetch(`${API_URL}/notes`)
 
@@ -40,4 +40,4 @@ export async function getNotes(): Promise<Note[]> {
   }
 
   return response.json()
-}*/
+}

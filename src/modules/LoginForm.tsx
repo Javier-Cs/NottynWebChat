@@ -109,28 +109,44 @@ export default function LoginModal() {
 
                 {/* Password */}
                 <div>
-                  <label className="block mb-2 text-sm font-medium text-zinc-700 dark:text-zinc-200">
-                    Contraseña
-                  </label>
+                    <label className="block mb-2 text-sm font-medium text-zinc-700 dark:text-zinc-200">
+                        Contraseña
+                    </label>
 
-                  <input
-                    type="password"
-                    placeholder="********"
-                    className="
-                      w-full
-                      rounded-lg
-                      border border-zinc-300
-                      dark:border-zinc-700
-                      bg-white dark:bg-zinc-800
-                      px-4 py-3
-                      text-sm
-                      text-zinc-900 dark:text-white
-                      outline-none
-                      focus:ring-2
-                      focus:ring-green-500
-                      transition
-                    "
-                  />
+                    <input
+                        type="password"
+                        placeholder="********"
+                        className="
+                        w-full
+                        rounded-lg
+                        border border-zinc-300
+                        dark:border-zinc-700
+                        bg-white dark:bg-zinc-800
+                        px-4 py-3
+                        text-sm
+                        text-zinc-900 dark:text-white
+                        outline-none
+                        focus:ring-2
+                        focus:ring-green-500
+                        transition
+                        "
+                    />
+                    </div>
+
+                    {/* Recuperar contraseña */}
+                    <div className="flex justify-end">
+                    <button
+                        type="button"
+                        className="
+                        text-sm
+                        text-green-600
+                        hover:text-green-700
+                        hover:underline
+                        transition
+                        "
+                    >
+                        ¿Olvidaste tu contraseña?
+                    </button>
                 </div>
 
                 {/* Botón */}
@@ -238,8 +254,8 @@ export default function LoginModal() {
                   className="
                     w-full
                     rounded-lg
-                    bg-blue-600
-                    hover:bg-blue-700
+                    bg-green-600
+                    hover:bg-green-700
                     text-white
                     font-medium
                     py-3
@@ -276,7 +292,7 @@ export default function LoginModal() {
                     onClick={() => setIsLogin(true)}
                     className="
                       ml-1
-                      text-blue-600
+                      text-green-600
                       hover:underline
                       font-medium
                     "
