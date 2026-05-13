@@ -15,3 +15,29 @@ export interface Note{
   fechaCreacion: string
   bloques: Block[]
 }
+
+
+
+// api de LOGIN 
+export interface LoginRequest {
+  email: string
+  passHash: string
+  
+}
+
+// responselogin
+export interface registrerResponse {
+  codex: string
+  avatarName: string
+  confirmPassHash : string
+}
+
+export interface LoginResponse {
+  token: string
+  expiracion: string
+  estado: boolean
+  isDelate: boolean
+  idUsuario: number
+  codex: string
+  avatarName: string
+}

@@ -1,8 +1,92 @@
-import { useState } from "react";
+import React, { use, useState } from "react";
+import { loginUser, registerUser } from "@/services/notes.service";
+import { set } from "astro:schema";
 
 export default function LoginModal() {
   const [open, setOpen] = useState(false);
   const [isLogin, setIsLogin] = useState(true);
+
+  // datos de formulario
+  const [email, setEmail] = useState("");
+  const [passHash, setPassHash] = useState("");
+  const [confirmPassHash, setConfirmPassHash] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+
+  const handleLogin = async (e: React.FormEvent) => {
+  e.preventDefault();
+
+  try {
+    setLoading(true);
+    setError("");
+
+    const data = await loginUser({
+      email,
+      passHash: passHash,
+    });
+
+    console.log("Login exitoso:", data);
+
+    localStorage.setItem("token", data.token);
+
+    localStorage.setItem(
+      "user",
+      JSON.stringify({
+        idUsuario: data.idUsuario,
+        codex: data.codex,
+        avatarName: data.avatarName,
+        email: email,
+      })
+    );
+
+    setOpen(false);
+
+    setEmail("");
+    setPassHash("");
+
+    window.location.href = "/";
+
+  } catch (err: any) {
+    setError(err.message || "Error desconocido");
+  } finally {
+    setLoading(false);
+  }
+};
+
+
+
+
+
+const handleRegister = async (e: React.FormEvent) => {
+  e.preventDefault();
+
+  try{
+    setLoading(true);
+    setError("");
+    if(passHash !== confirmPassHash){
+      setError("Las contraseñas no coinciden");
+      alert("Las contraseñas no coinciden");
+      return;
+    }
+
+    const data = await registerUser({
+      email,
+      passHash: passHash,
+    });
+
+    console.log("Registro exitoso:", data);
+
+
+
+  }catch(err: any){
+    setError(err.message || "Error desconocido");
+  }finally{
+    setLoading(false);
+  }
+};
+
+
+
 
   return (
     <>
@@ -80,7 +164,7 @@ export default function LoginModal() {
 
             {/* FORM LOGIN */}
             {isLogin ? (
-              <form className="space-y-5">
+              <form className="space-y-5" onSubmit={handleLogin}>
                 {/* Email */}
                 <div>
                   <label className="block mb-2 text-sm font-medium text-zinc-700 dark:text-zinc-200">
@@ -90,6 +174,8 @@ export default function LoginModal() {
                   <input
                     type="email"
                     placeholder="correo@ejemplo.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     className="
                       w-full
                       rounded-lg
@@ -130,6 +216,8 @@ export default function LoginModal() {
                         focus:ring-green-500
                         transition
                         "
+                        value={passHash}
+                        onChange={(e) => setPassHash(e.target.value)}
                     />
                     </div>
 
@@ -152,6 +240,7 @@ export default function LoginModal() {
                 {/* Botón */}
                 <button
                   type="submit"
+                  disabled={loading}
                   className="
                     w-full
                     rounded-lg
@@ -164,12 +253,12 @@ export default function LoginModal() {
                     shadow-md
                   "
                 >
-                  Iniciar Sesión
+                  {loading ? "Cargando..." : "Iniciar Sesión"}
                 </button>
               </form>
             ) : (
               /* FORM REGISTER */
-              <form className="space-y-5">
+              <form className="space-y-5" onSubmit={handleRegister}>
                 {/* Email */}
                 <div>
                   <label className="block mb-2 text-sm font-medium text-zinc-700 dark:text-zinc-200">
@@ -179,6 +268,8 @@ export default function LoginModal() {
                   <input
                     type="email"
                     placeholder="correo@ejemplo.com"
+                    value={email}
+                    onChange={(e) => setEmail(e.target.value)}
                     className="
                       w-full
                       rounded-lg
@@ -205,6 +296,8 @@ export default function LoginModal() {
                   <input
                     type="password"
                     placeholder="********"
+                    value={passHash}
+                    onChange={(e) => setPassHash(e.target.value)}
                     className="
                       w-full
                       rounded-lg
@@ -231,6 +324,8 @@ export default function LoginModal() {
                   <input
                     type="password"
                     placeholder="********"
+                    value={confirmPassHash}
+                    onChange={(e) => setConfirmPassHash(e.target.value)}
                     className="
                       w-full
                       rounded-lg
